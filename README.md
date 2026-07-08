@@ -2,7 +2,7 @@
 
 OpenHost 是一个 Windows 文件打开中转器。它可以把自己注册为 `.ppt`、`.pptx` 等文件的打开方式，收到文件路径后，再按本地配置转交给 Microsoft Office、WPS 或系统默认程序。
 
-OpenHost 不提供界面，不进行交互，也不依赖 CWSTool。
+OpenHost 不提供界面，不进行交互，也不依赖组织内的CWSTool。
 
 ## 支持的文件
 
