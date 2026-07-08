@@ -185,6 +185,7 @@ if (-not $SkipSettingsUi) {
 New-Item -ItemType Directory -Force -Path $packageDir | Out-Null
 Copy-Item -Path (Join-Path $publishDir "*") -Destination $packageDir -Recurse -Force
 Copy-Item -Path (Join-Path $repoRoot "README.md") -Destination $packageDir -Force
+Copy-Item -Path (Join-Path $repoRoot "RELEASE_NOTES.md") -Destination $packageDir -Force
 
 if (Test-Path $settingsOutputPath) {
     Copy-Item -Path $settingsOutputPath -Destination $packageDir -Force
