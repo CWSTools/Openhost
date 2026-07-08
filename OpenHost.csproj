@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>OpenHost</AssemblyName>
+    <RootNamespace>OpenHost</RootNamespace>
+    <Authors>CWS</Authors>
+    <Company>CWS</Company>
+    <RestoreSources>$(UserProfile)\.nuget\packages;$(RestoreSources)</RestoreSources>
+    <RestoreIgnoreFailedSources>true</RestoreIgnoreFailedSources>
+  </PropertyGroup>
+</Project>
