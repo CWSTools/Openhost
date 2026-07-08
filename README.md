@@ -27,12 +27,15 @@ dist\OpenHost-win-x64.zip
 
 zip 内包含 `OpenHost.exe`、运行依赖、`README.md` 和示例脚本。
 
+如果本机安装了 Visual Studio Build Tools，并包含“使用 C++ 的桌面开发”组件，脚本也会自动构建并打包 Win32 原生配置工具 `OpenHostSettings.exe`。
+
 可选参数：
 
 ```powershell
 .\scripts\build-package.ps1 -Configuration Debug
 .\scripts\build-package.ps1 -Runtime win-x64 -SelfContained
 .\scripts\build-package.ps1 -NoRestore
+.\scripts\build-package.ps1 -SkipSettingsUi
 ```
 
 ## 安装或更新
@@ -88,6 +91,66 @@ Office, WPS, System
 ```text
 %LOCALAPPDATA%\OpenHost\config.json
 ```
+
+## Win32 配置界面
+
+如果包里包含 `OpenHostSettings.exe`，可以直接运行它进行图形化配置。
+
+### 打开界面
+
+把 zip 解压后，进入解压目录，双击：
+
+```text
+OpenHostSettings.exe
+```
+
+也可以在 PowerShell 中运行：
+
+```powershell
+.\OpenHostSettings.exe
+```
+
+`OpenHostSettings.exe` 需要和 `OpenHost.exe` 放在同一个目录。它只负责配置，不接管文件打开逻辑；真正的文件中转仍由 `OpenHost.exe` 完成。
+
+### 界面功能
+
+界面使用 MFC/Windows 原生控件，提供：
+
+- PowerPoint / Word / Excel / PDF 的打开目标选择
+- 保存配置
+- 注册或刷新文件关联
+- 查询 Office/WPS 位置
+- 打开配置目录
+
+### 使用步骤
+
+1. 在 PowerPoint、Word、Excel、PDF 四个下拉框中选择打开目标。
+2. 点击 `保存配置`，把选择写入：
+
+```text
+%LOCALAPPDATA%\OpenHost\config.json
+```
+
+3. 点击 `注册关联`，把 OpenHost 注册为 `.ppt`、`.pptx` 等文件的打开方式。
+4. 之后双击支持的文件时，会先进入 `OpenHost.exe`，再按配置转交给 Office、WPS 或系统默认程序。
+
+### 按钮说明
+
+- `保存配置`：只保存当前下拉框选择，不修改文件关联。
+- `注册关联`：注册或刷新文件关联，通常安装后点一次即可。
+- `查询位置`：扫描 Office/WPS 安装位置，并写入：
+
+```text
+%LOCALAPPDATA%\OpenHost\app-locations.json
+```
+
+- `配置目录`：打开 `%LOCALAPPDATA%\OpenHost`，方便查看 `config.json` 和 `app-locations.json`。
+
+### 注意
+
+- 第一次使用建议先点 `保存配置`，再点 `注册关联`。
+- 如果移动了解压目录，需要重新运行 `OpenHostSettings.exe` 并点击 `注册关联`。
+- `OpenHostSettings.exe` 是配置工具；卸载或不用 UI 时，`OpenHost.exe` 仍可通过协议命令配置。
 
 ## 查询 Office 和 WPS 位置
 
